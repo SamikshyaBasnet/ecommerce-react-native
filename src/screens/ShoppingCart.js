@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   button: {
-    position: "absolute",
     bottom: 0,
     alignItems: "center",
     alignSelf: "center",
