@@ -11,19 +11,21 @@ import {
   Pressable,
 } from "react-native";
 import products from "../data/products";
+import { useSelector } from "react-redux";
 
 const ProductDetailsScreen = () => {
-  const product = products[0];
+  const product = useSelector((state) => state.products.selectedProduct);
   const { width } = useWindowDimensions();
   const addToCart = () => {
     console.warn("Add to cart");
   };
+
   return (
     <View>
       {/* Image container */}
       <ScrollView showsVerticalScrollIndicator={false}>
         <FlatList
-          data={product.images}
+          data={product?.images}
           renderItem={({ item }) => (
             <Image
               source={{ uri: item }}
