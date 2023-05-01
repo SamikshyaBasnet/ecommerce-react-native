@@ -3,6 +3,7 @@ import { Stack, useRouter } from "expo-router";
 import { ScrollView, SafeAreaView, StyleSheet } from "react-native";
 import ProductsScreen from "./src/screens/ProductsScreen";
 import ProductDetailsScreen from "./src/screens/ProductDetailsScreen";
+import ShoppingCart from "./src/screens/ShoppingCart";
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
@@ -13,9 +14,8 @@ export default function App() {
         }}
       /> */}
 
-      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
-      <ProductDetailsScreen />
-      {/* </ScrollView> */}
+      {/* <ProductDetailsScreen /> */}
+      <ShoppingCart />
       <StatusBar style="auto" />
     </SafeAreaView>
   );
