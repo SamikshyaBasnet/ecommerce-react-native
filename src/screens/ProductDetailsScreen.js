@@ -23,9 +23,12 @@ const ProductDetailsScreen = () => {
   };
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       {/* Image container */}
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={{ marginBottom: 80 }}
+        showsVerticalScrollIndicator={false}
+      >
         <FlatList
           data={product?.images}
           renderItem={({ item }) => (

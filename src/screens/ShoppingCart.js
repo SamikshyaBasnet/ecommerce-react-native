@@ -2,7 +2,6 @@ import React from "react";
 import { View, FlatList, Text, Pressable, StyleSheet } from "react-native";
 import CartListItem from "../components/CartListItem";
 import { useSelector } from "react-redux";
-import { ScrollView } from "react-native";
 import {
   selectDeliveryPrice,
   selectSubTotal,
@@ -41,18 +40,18 @@ const ShoppingCardTotal = () => {
 const ShoppingCart = () => {
   const cart = useSelector((state) => state.cart.items);
   return (
-    <>
-      <ScrollView showsVerticalScrollIndicator={false}>
+    <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <FlatList
           data={cart}
           renderItem={({ item }) => <CartListItem cartItem={item} />}
           ListFooterComponent={ShoppingCardTotal}
         />
-      </ScrollView>
+      </View>
       <Pressable style={styles.button}>
         <Text style={styles.buttonText}>Checkout</Text>
       </Pressable>
-    </>
+    </View>
   );
 };
 
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
     borderColor: "gainsboro",
     paddingTop: 10,
     borderTopWidth: 1,
-    marginBottom: 20,
+    height: 160,
   },
   row: {
     flexDirection: "row",
@@ -79,6 +78,7 @@ const styles = StyleSheet.create({
   },
   button: {
     bottom: 0,
+    position: "absolute",
     alignItems: "center",
     alignSelf: "center",
     width: "90%",
