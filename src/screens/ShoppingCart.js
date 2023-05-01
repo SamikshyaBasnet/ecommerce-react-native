@@ -1,34 +1,54 @@
 import React from "react";
 import { View, FlatList, Text, Pressable, StyleSheet } from "react-native";
-import cart from "../data/cart";
 import CartListItem from "../components/CartListItem";
+import { useSelector } from "react-redux";
+import { ScrollView } from "react-native";
+import {
+  selectDeliveryPrice,
+  selectSubTotal,
+  selectTotal,
+} from "../store/cartSlice";
 
 const ShoppingCardTotal = () => {
+  const cartItems = useSelector((state) => state.cart.items);
+
+  // const totalPrice = cartItems.reduce((total, item) => {
+  //   const totalPriceOfItem = total + item.product.price * item.quantity;
+  //   return totalPriceOfItem;
+  // }, 0);
+
+  const subTotal = useSelector(selectSubTotal);
+  const deliveryFee = useSelector(selectDeliveryPrice);
+  const totalPrice = useSelector(selectTotal);
+
   return (
     <View style={styles.totalsContainer}>
       <View style={styles.row}>
-        <Text style={styles.text}>Subtotal</Text>
-        <Text>41,000 US$</Text>
+        <Text style={styles.text}></Text>
+        <Text>{subTotal} US$</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.text}>Delivery</Text>
-        <Text>10 US$</Text>
+        <Text>{deliveryFee}US$</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.textBold}>Total</Text>
-        <Text style={styles.textBold}>41,010 US$</Text>
+        <Text style={styles.textBold}>{totalPrice} US$</Text>
       </View>
     </View>
   );
 };
 const ShoppingCart = () => {
+  const cart = useSelector((state) => state.cart.items);
   return (
     <>
-      <FlatList
-        data={cart}
-        renderItem={({ item }) => <CartListItem cartItem={item} />}
-        ListFooterComponent={ShoppingCardTotal}
-      />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <FlatList
+          data={cart}
+          renderItem={({ item }) => <CartListItem cartItem={item} />}
+          ListFooterComponent={ShoppingCardTotal}
+        />
+      </ScrollView>
       <Pressable style={styles.button}>
         <Text style={styles.buttonText}>Checkout</Text>
       </Pressable>
@@ -42,6 +62,7 @@ const styles = StyleSheet.create({
     borderColor: "gainsboro",
     paddingTop: 10,
     borderTopWidth: 1,
+    marginBottom: 20,
   },
   row: {
     flexDirection: "row",
@@ -58,7 +79,7 @@ const styles = StyleSheet.create({
   },
   button: {
     position: "absolute",
-    bottom: 30,
+    bottom: 0,
     alignItems: "center",
     alignSelf: "center",
     width: "90%",
